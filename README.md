@@ -1,27 +1,27 @@
-# oflc-data-analysis
+# OFLC Data Analysis
 Analysis of disclosure data from the Office of Foreign Labor Certification
 
-Problem Definition
+## Problem Definition
 
-Data Extraction 
+## Data Extraction 
 
-Data Ingestion
+## Data Ingestion
 
-Exploratory Data Analysis 
+## Exploratory Data Analysis 
 
-Feature Engineering
+## Feature Engineering
 
-Base Line Modeling 
+## Base Line Modeling 
 
-Model Performance 
+## Model Performance 
 
-HyperParameter Tuning 
+## HyperParameter Tuning 
 
-Model Evaluation
+## Model Evaluation
 
-Interpreation 
+## Interpreation 
 
-Model Deployment
+## Model Deployment
 
 
 
