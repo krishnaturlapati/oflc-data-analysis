@@ -169,7 +169,8 @@ After reviewing the data dictionary for all thirteen files, here is a consolidat
 
 
 In short the response variable for the model will be the field which has the following aliases  APPROVAL_STATUS, STATUS or CASE_STATUS and the other fields describe the applicants profile 
-![oflc_data](C:\Users\Turla\Desktop\Projects\oflc-data-analysis\imgs\oflc_data.jpeg)
+
+![oflc_data](imgs/oflc_data.jpeg)
 
 ## Exploratory Data Analysis 
 
