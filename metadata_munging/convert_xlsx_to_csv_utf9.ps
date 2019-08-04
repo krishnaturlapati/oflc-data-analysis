@@ -1,4 +1,4 @@
-﻿# Script to convert xlsx to utf8 csv
+# Script to convert xlsx to utf8 csv
 param (
   [string]$soruce_dir = "C:\Users\Turla\Desktop\Projects\oflc\raw_h1b\stg\",
   [string]$destination_dir = "C:\Users\Turla\Desktop\Projects\oflc\raw_h1b\stg\",
@@ -67,5 +67,3 @@ catch
     Write-Log "ERROR" "Conversion failed" $ScriptLogName
     Exit(1)
 }
-
-
