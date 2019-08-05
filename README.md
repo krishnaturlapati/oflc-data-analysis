@@ -2,36 +2,17 @@
 Analysis of H1-B disclosure data from the Office of Foreign Labor Certification. This dataset is interesting because it contains repeated observations of the same variables over 11 years. 
 
 * [Problem Definition](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#problem-definition)
-
 * [Data Extraction](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#data-extraction)
-
 * [Data Ingestion](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#data-ingestion)
-
 * [Data Wrangling/Cleaning](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#data-wranglingcleaning)
-
 * [Exploratory Data Analysis](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#exploratory-data-analysis)
-
 * [Feature Engineering](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#feature-engineering)
-
 * [Base Line Modeling](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#base-line-modeling)
-
 * [Model Performance](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model-performance)
-
 * [HyperParameter Tuning](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#hyperparameter-tuning) 
-
 * [Model Evaluation](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model-evaluation)
-
 * [Interpreation](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#interpreation)
-
 * [Model Deployment](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model-deployment)
-
-  
-
-[TOC]
-
-
-
-
 
 ## Problem Definition
 
