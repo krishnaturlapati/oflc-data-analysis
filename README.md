@@ -46,6 +46,7 @@ Original Metadata, viewing the metadata of all 13 files in one layout helps in u
 
 <details>
   <summary>Click to expand!</summary>
+  
 | 2008                 | 2009_1               | 2009_2                         | 2010                           | 2011                           | 2012                           | 2013                           | 2014                           | 2015                  | 2016                  | 2017                        | 2018                        | 2019                           |
 | -------------------- | -------------------- | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | --------------------- | --------------------- | --------------------------- | --------------------------- | ------------------------------ |
 | SUBMITTED_DATE       | SUBMITTED_DATE       | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | CASE_NUMBER           | CASE_NUMBER           | CASE_NUMBER                 | CASE_NUMBER                 | CASE_NUMBER                    |
@@ -104,8 +105,15 @@ Original Metadata, viewing the metadata of all 13 files in one layout helps in u
 |                      |                      |                                |                                |                                |                                |                                |                                |                       |                       |                             |                             | WORKSITE_STATE                 |
 |                      |                      |                                |                                |                                |                                |                                |                                |                       |                       |                             |                             | WORKSITE_POSTAL_CODE           |
 |                      |                      |                                |                                |                                |                                |                                |                                |                       |                       |                             |                             | ORIGINAL_CERT_DATE             |
+
+
 </details>
+
+
 After reviewing the data dictionary for all thirteen files, here is a consolidated view 
+
+<details>
+  <summary>Click to expand!</summary>
 
 | 2008                      | 2009_1                   | 2009_2                         | 2010                           | 2011                           | 2012                           | 2013                           | 2014                           | 2015                  | 2016                  | 2017                        | 2018                        | 2019                           |
 | ------------------------- | ------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | --------------------- | --------------------- | --------------------------- | --------------------------- | ------------------------------ |
@@ -185,6 +193,7 @@ After reviewing the data dictionary for all thirteen files, here is a consolidat
 | PREVAILING_WAGE_1         | STATE_1                  |                                | WORK_LOCATION_CITY2            |                                |                                |                                |                                |                       |                       |                             |                             |                                |
 | YR_SOURCE_PUB_1           | PREVAILING_WAGE_1        |                                | WORK_LOCATION_STATE2           |                                |                                |                                |                                |                       |                       |                             |                             |                                |
 
+</details>
 
 
 In short the response variable for the model will be the field which has the following aliases  APPROVAL_STATUS, STATUS or CASE_STATUS and the other fields describe the applicants profile 
@@ -240,6 +249,9 @@ materialized view : h1b_yearly_performance_model
 
 Sample rows from h1b_yearly_performance_model
 
+<details>
+  <summary>Click to expand!</summary>
+
 | EMPLOYMENT_DURATION_YEARS | US_REGION | ANNUAL_SALARY_BAND | FULL_TIME_POSITION | NAICS_CODE_2 | YYYY | CASE_STATUS |
 | ------------------------- | --------- | ------------------ | ------------------ | ------------ | ---- | ----------- |
 | 3                         | Midwest   | b3                 | 1                  | 53           | 2019 | 1           |
@@ -253,7 +265,7 @@ Sample rows from h1b_yearly_performance_model
 | 3                         | South     | b3                 | 1                  | 54           | 2019 | 1           |
 | 3                         | South     | b2                 | 1                  | 54           | 2019 | 1           |
 
-
+</details>
 
 **Final Data Flow** 
 
