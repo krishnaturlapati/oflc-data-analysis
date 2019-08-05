@@ -172,6 +172,36 @@ In short the response variable for the model will be the field which has the fol
 
 ![oflc_data](imgs/oflc_data.jpeg)
 
+After normalizing all columns, the following columns seem to have consistent history across time and are more relevant to the problem definition. This is the final schema used for modeling 
+
+| FIELD                 | DESCRIPTION                                                  |
+| --------------------- | ------------------------------------------------------------ |
+| CASE_NUMBER           | Unique row id                                                |
+| CASE_STATUS           | Status associated with the last   significant event or decision. Valid values include “Certified,”   “Certified-Withdrawn,” Denied,” and “Withdrawn”. |
+| CASE_SUBMITTED        | Date and time the application was submitted.                 |
+| EMPLOYMENT_START_DATE | Beginning date of employment.                                |
+| EMPLOYMENT_END_DATE   | Ending date of employment.                                   |
+| EMPLOYER_STATE        | State of employer requesting LCA/H1B                         |
+| JOB_TITLE             | title of job                                                 |
+| SOC_CODE              | Occupational code associated with the job being requested for   temporary labor condition, as classified by the Standard Occupational   Classification (SOC) System. |
+| SOC_NAME              | Occupational name associated with the SOC CODE.              |
+| NAICS_CODE            | Industry code associated with   the employer requesting permanent labor condition, as classified by the North   American Industrial Classification System (NAICS). |
+| NEW_EMPLOYMENT        | Indicates requested   worker(s) will begin employment for new employer, |
+| FULL_TIME_POSITION    | Y = Full Time Position; N = Part   Time Position.            |
+| PREVAILING_WAGE       | Prevailing Wage for the job being requested for temporary   labor condition. |
+| PW_UNIT_OF_PAY        | Unit of Pay.  Valid   values include “Daily (DAI),” “Hourly (HR),” “Bi-weekly (BI),” “Weekly (WK),”   “Monthly (MTH),” and “Yearly (YR)”. |
+| PW_WAGE_LEVEL         | Variables include "I", "II",   "III", "IV" or "N/A."         |
+
+**Derived Fields** 
+
+| FIELD               | DESCRIPTION                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| YYYY                | year of filing                                               |
+| EMPLOYMENT_DURATION | Employment duration in days EMPLOYEMENT_END_DATE - EMPLOYMENT_START_DATE, |
+| NAICS_CODE_2        | First two digits of six digits NAICS code                    |
+| ANNUAL_SALARY       | Normalize prevailing wage to annual salary                   |
+| US_REGION           | Regions of United States                                     |
+
 ## Exploratory Data Analysis 
 
 ## Feature Engineering
