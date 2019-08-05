@@ -1,6 +1,10 @@
 # OFLC Data Analysis
 Analysis of H1-B disclosure data from the Office of Foreign Labor Certification. This dataset is interesting because it contains repeated observations of the same variables over 11 years. 
 
+[Problem Definition]()
+[Data Extraction]()
+[Exploratory Data Analysis](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#exploratory-data-analysis)
+
 ## Problem Definition
 
 The objective is use the publicly available H1-B disclosure data to build a model that can predict the visa approval status of a H1-B application. The secondary objective is to interpret the results to find which factors influence the approval status. 
