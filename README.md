@@ -46,7 +46,7 @@ Original Metadata, viewing the metadata of all 13 files in one layout helps in u
 
 <details>
   <summary>Click to expand!</summary>
-  
+
 | 2008                 | 2009_1               | 2009_2                         | 2010                           | 2011                           | 2012                           | 2013                           | 2014                           | 2015                  | 2016                  | 2017                        | 2018                        | 2019                           |
 | -------------------- | -------------------- | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | --------------------- | --------------------- | --------------------------- | --------------------------- | ------------------------------ |
 | SUBMITTED_DATE       | SUBMITTED_DATE       | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | LCA_CASE_NUMBER                | CASE_NUMBER           | CASE_NUMBER           | CASE_NUMBER                 | CASE_NUMBER                 | CASE_NUMBER                    |
@@ -283,7 +283,7 @@ Sample rows from h1b_yearly_performance_model
 
 ## Model Evaluation
 
-## Interpreation 
+## Interpretation 
 
 ## Model Deployment
 
