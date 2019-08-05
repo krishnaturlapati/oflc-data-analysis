@@ -1,9 +1,18 @@
 # OFLC Data Analysis
 Analysis of H1-B disclosure data from the Office of Foreign Labor Certification. This dataset is interesting because it contains repeated observations of the same variables over 11 years. 
 
-[Problem Definition]()
-[Data Extraction]()
-[Exploratory Data Analysis](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#exploratory-data-analysis)
+* [Problem Definition]()
+* [Data Extraction]()
+* [Data Ingestion]()
+* [Data Wrangling/Cleaning]()
+* [Exploratory Data Analysis](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#exploratory-data-analysis)
+* [Feature Engineering]()
+* [Base Line Modeling]()
+* [Model Performance]()
+* [HyperParameter Tuning]() 
+* [Model Evaluation]()
+* [Interpreation]()
+* [Model Deployment]()
 
 ## Problem Definition
 
