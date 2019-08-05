@@ -1,0 +1,3 @@
+create materialized view h1b_yearly_performance_model
+as 
+select employment_duration_years, us_region, annual_salary_band,naics_code_2,yyyy, case_status from h1b_yearly_performance_reporting

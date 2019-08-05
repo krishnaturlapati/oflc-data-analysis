@@ -18,6 +18,10 @@ Analysis of H1-B disclosure data from the Office of Foreign Labor Certification.
 
 The objective is use the publicly available H1-B disclosure data to build a model that can predict the visa approval status of a H1-B application. The secondary objective is to interpret the results to find which factors influence the approval status. 
 
+**Assumption**
+
+The case status is skewed on certified value, (i.e. approved ), for the sake of simplicity and ease of development case status is assumed to be a binary field, any case status not certified will be grouped into denied.  
+
 ## Data Extraction 
 
 The OFLC performance disclosure data can be obtained from this link https://www.foreignlaborcert.doleta.gov/performancedata.cfm. Save the 13 xlsx in a raw or a staging area, couple of columns contain embedded commas its recommened that save the xlsx to csv utf-8 format. Save the converted utf-8 csv's in a seperate folder. 
@@ -207,13 +211,51 @@ After normalizing all columns, the following columns seem to have consistent his
 
 **Derived Fields** 
 
-| FIELD               | DESCRIPTION                                                  |
-| ------------------- | ------------------------------------------------------------ |
-| YYYY                | year of filing                                               |
-| EMPLOYMENT_DURATION | Employment duration in days EMPLOYEMENT_END_DATE - EMPLOYMENT_START_DATE, |
-| NAICS_CODE_2        | First two digits of six digits NAICS code                    |
-| ANNUAL_SALARY       | Normalize prevailing wage to annual salary                   |
-| US_REGION           | Regions of United States                                     |
+| FIELD                    | DESCRIPTION                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| YYYY                     | year of filing                                               |
+| EMPLOYMENT_DURATION      | Employment duration in days EMPLOYEMENT_END_DATE - EMPLOYMENT_START_DATE, |
+| EMPLOYMENT_DURATION_BAND |                                                              |
+| NAICS_CODE_2             | First two digits of six digits NAICS code                    |
+| ANNUAL_SALARY            | Normalize prevailing wage to annual salary                   |
+| ANNUAL_SALARY_BAND       | Split the annual salary into six bands                       |
+| US_REGION                | Regions of United States                                     |
+
+
+
+**CORE TABLE FOR MODELING** 
+
+materialized view : h1b_yearly_performance_model
+
+| FIELD                     | DESCRIPTION         |
+| ------------------------- | ------------------- |
+| EMPLOYMENT_DURATION_YEARS | Categorical Feature |
+| US_REGION                 | Categorical Feature |
+| FULL_TIME_POSITION        | True/False Feature  |
+| NAICS_CODE_2              | Categorical Feature |
+| ANNUAL_SALARY_BAND        | Categorical Feature |
+| CASE_STATUS               | Response Variable   |
+
+Sample rows from h1b_yearly_performance_model
+
+| EMPLOYMENT_DURATION_YEARS | US_REGION | ANNUAL_SALARY_BAND | FULL_TIME_POSITION | NAICS_CODE_2 | YYYY | CASE_STATUS |
+| ------------------------- | --------- | ------------------ | ------------------ | ------------ | ---- | ----------- |
+| 3                         | Midwest   | b3                 | 1                  | 53           | 2019 | 1           |
+| 3                         | South     | b2                 | 1                  | 54           | 2019 | 1           |
+| 3                         | South     | b2                 | 1                  | 54           | 2019 | 1           |
+| 2                         | Northeast | b2                 | 1                  | 52           | 2019 | 1           |
+| 3                         | West      | b3                 | 1                  | 23           | 2019 | 1           |
+| 2                         | Northeast | b4                 | 1                  | 52           | 2019 | 1           |
+| 3                         | South     | b2                 | 1                  | 54           | 2019 | 1           |
+| 3                         | South     | b3                 | 1                  | 54           | 2019 | 1           |
+| 3                         | South     | b3                 | 1                  | 54           | 2019 | 1           |
+| 3                         | South     | b2                 | 1                  | 54           | 2019 | 1           |
+
+
+
+**Final Data Flow** 
+
+![oflc_data](imgs/oflc_data_prep_pipeline.jpeg)
 
 ## Exploratory Data Analysis 
 
