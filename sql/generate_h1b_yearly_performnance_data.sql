@@ -1,5 +1,26 @@
-/* gen h1b yearly performance data query */ 
-select CASE_NUMBER, CASE_STATUS,CASE_SUBMITTED,
+
+insert into h1b_yearly_performance_data (CASE_NUMBER  ,
+CASE_STATUS  ,
+CASE_SUBMITTED ,
+EMPLOYMENT_START_DATE,
+EMPLOYMENT_END_DATE,
+EMPLOYMENT_DURATION_DAYS ,
+EMPLOYER_STATE  ,
+US_REGION ,
+JOB_TITLE  ,
+SOC_CODE ,
+SOC_NAME ,
+NAICS_CODE ,
+FULL_TIME_POSITION ,
+PREVAILING_WAGE , 
+PW_UNIT_OF_PAY ,
+ANNUAL_SALARY , 
+PW_WAGE_LEVEL ,
+NAICS_CODE_2 ,
+NAICS_CODE_2_DESC ,
+YYYY )
+
+select CASE_NUMBER, CASE_STATUS,cast(CASE_SUBMITTED as date),
 cast(EMPLOYMENT_START_DATE as date) as EMPLOYMENT_START_DATE, 
 cast(EMPLOYMENT_END_DATE as date) as EMPLOYMENT_END_DATE, 
 cast(EMPLOYMENT_END_DATE as date) - cast(EMPLOYMENT_START_DATE as date) as EMPLOYMENT_DURATION_DAYS,  
@@ -9,7 +30,6 @@ JOB_TITLE,
 SOC_CODE,
 SOC_NAME,
 NAICS_CODE,
-NEW_EMPLOYMENT,
 case when FULL_TIME_POSITION = 'Y' then 1 when FULL_TIME_POSITION = 'N' then 0 end as FULL_TIME_POSITION ,
 case when PREVAILING_WAGE = 'N/A' then 0
 when PREVAILING_WAGE is null then 0
@@ -35,5 +55,4 @@ join us_state_regions as t2
 on t2.state_code = t1.EMPLOYER_STATE
 join naics_code_lookup as  t3
 on cast(substring(t1.naics_code, 1,2) as integer) = t3.naics_2 
-where t1.pw_unit_of_pay is null 
-limit 10
+

@@ -1,3 +1,4 @@
+
 create table h1b_yearly_performance_data
 (
 CASE_NUMBER  character varying(100),
@@ -12,7 +13,6 @@ JOB_TITLE  character varying(1000),
 SOC_CODE character varying(1000),
 SOC_NAME character varying(1000),
 NAICS_CODE character varying(10),
-NEW_EMPLOYMENT integer,
 FULL_TIME_POSITION integer,
 PREVAILING_WAGE float, 
 PW_UNIT_OF_PAY character varying(100),
@@ -22,9 +22,3 @@ NAICS_CODE_2 integer,
 NAICS_CODE_2_DESC character varying(100),
 YYYY integer
 );
-
-
-
-
-
-
