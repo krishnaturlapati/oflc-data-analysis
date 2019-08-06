@@ -1,25 +1,23 @@
-
-create table h1b_yearly_performance_reporting
+CREATE TABLE public.h1b_yearly_performance_reporting
 (
-CASE_NUMBER  character varying(100),
-CASE_STATUS  integer,
-CASE_SUBMITTED date,
-EMPLOYMENT_START_DATE date,
-EMPLOYMENT_END_DATE date,
-EMPLOYMENT_DURATION_YEARS integer,
-EMPLOYER_STATE  character varying(10),
-US_REGION character varying(100),
-JOB_TITLE  character varying(1000),
-SOC_CODE character varying(1000),
-SOC_NAME character varying(1000),
-NAICS_CODE character varying(10),
-FULL_TIME_POSITION integer,
-PREVAILING_WAGE float, 
-PW_UNIT_OF_PAY character varying(100),
-ANNUAL_SALARY float, 
-ANNUAL_SALARY_BAND character varying(100), 
-PW_WAGE_LEVEL character varying(100),
-NAICS_CODE_2 integer,
-NAICS_CODE_2_DESC character varying(100),
-YYYY integer
-);
+    case_number character varying(2000) ,
+    case_status integer,
+    case_submitted date,
+    employment_start_date character varying(2000) ,
+    employment_end_date character varying(2000) ,
+    employment_duration_years integer,
+    employer_state character varying(2000) ,
+    us_region character varying(100) ,
+    job_title character varying(2000) ,
+    soc_code character varying ,
+    soc_name character varying ,
+    naics_code character varying ,
+    full_time_position integer,
+    prevailing_wage double precision,
+    pw_unit_of_pay character varying(2000) ,
+    annual_salary double precision,
+    annual_salary_band text ,
+    pw_wage_level character varying ,
+    naics_code_2 text ,
+    yyyy integer
+)
