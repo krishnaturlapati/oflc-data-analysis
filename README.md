@@ -348,7 +348,7 @@ pd.get_dummies(df['annual_salary_band'], drop_first=True)
 
 
 
-![](C:\Users\Turla\Desktop\Projects\oflc-data-analysis\imgs\eda_h1b.jpeg)
+![](imgs/eda_h1b.jpeg)
 
 ## Model 
 
