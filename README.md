@@ -5,13 +5,9 @@ Analysis of H1-B disclosure data from the Office of Foreign Labor Certification.
 * [Data Extraction](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#data-extraction)
 * [Data Ingestion](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#data-ingestion)
 * [Data Wrangling/Cleaning](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#data-wranglingcleaning)
-* [Exploratory Data Analysis](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#exploratory-data-analysis)
 * [Feature Engineering](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#feature-engineering)
-* [Base Line Modeling](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#base-line-modeling)
-* [Model Performance](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model-performance)
-* [HyperParameter Tuning](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#hyperparameter-tuning) 
-* [Model Evaluation](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model-evaluation)
-* [Interpreation](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#interpreation)
+* [Exploratory Data Analysis](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#exploratory-data-analysis)
+* [Model](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model)
 * [Model Deployment](https://github.com/turlapativenkatkrishna/oflc-data-analysis/blob/master/README.md#model-deployment)
 
 ## Problem Definition
@@ -271,23 +267,98 @@ Sample rows from h1b_yearly_performance_model
 
 ![oflc_data](imgs/oflc_data_prep_pipeline.jpeg)
 
-## Exploratory Data Analysis 
-
 ## Feature Engineering
 
-## Base Line Modeling 
+The following transformations were applied to the dataset 
 
-## Model Performance 
+**Binarize Case Status** 
 
-## HyperParameter Tuning 
+```sql
+when lower(CASE_STATUS) = 'certified' then 1 
+when lower(CASE_STATUS) = 'certified-withdrawn' then 1
+when lower(CASE_STATUS) = 'denied' then 0
+when lower(CASE_STATUS) = 'invalidated' then 0
+when lower(CASE_STATUS) = 'withdrawn' then 0
+when lower(CASE_STATUS) = 'pending quality and compliance review - unassigned' then 0
+when lower(CASE_STATUS) = 'rejected' then 0
+```
+ **Normalize Annual Salary** 
 
-## Model Evaluation
+Using unit of pay, converted all prevailing wage information into annual salary  
 
-## Interpretation 
+```sql
+when PREVAILING_WAGE in ('', 'N/A', '.', '20-70') then '0'
+	when pw_unit_of_pay is null and (cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float) = 0) then 0
+	when pw_unit_of_pay is null and PREVAILING_WAGE is null  then 0
+	when pw_unit_of_pay is null and PREVAILING_WAGE = '0.00'  then 0
+	when pw_unit_of_pay is null and PREVAILING_WAGE = '0'  then 0
+	when lower(pw_unit_of_pay) = 'year' then cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float) 
+	when lower(pw_unit_of_pay) = 'yr' then cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float) 
+	when lower(pw_unit_of_pay) = 'month' then 12*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'mth' then 12*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'bi-weekly' then 26*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'bi-weekly' and PREVAILING_WAGE = '0' then 0
+	when lower(pw_unit_of_pay) = 'bi-weekly' and PREVAILING_WAGE = '0.00' then 0
+	when lower(pw_unit_of_pay) = 'bi' then 26*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'weekly' then 52*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'week' then 52*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'wk' then 52*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'hour' then 2080*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)
+	when lower(pw_unit_of_pay) = 'hr' then 2080*cast(REPLACE(REPLACE(PREVAILING_WAGE, '$',''), ',', '') as float)	
+```
+
+**Annual Salary Band Range Definition** 
+
+```sql
+when annual_salary between 0 and 50000 then 'b1'
+when annual_salary between 50001 and 100000 then 'b2'
+when annual_salary between 100001 and 150000 then 'b3'
+when annual_salary between 150001 and 200000 then 'b4'
+when annual_salary between 200000 and 250000 then 'b5'
+when annual_salary > 250000 then  'b6' 
+```
+
+**Employment Duration in years** 
+
+```sql
+EMPLOYMENT_END_YEAR - EMPLOYMENT_START_YEAR as EMPLOYMENT_DURATION_YEARS,  
+cast(split_part(EMPLOYMENT_END_DATE, '/', 3) as integer)  as EMPLOYMENT_END_YEAR, 
+cast(split_part(EMPLOYMENT_START_DATE, '/', 3) as integer) as EMPLOYMENT_START_YEAR,
+```
+
+**Binarize Full time position field** 
+
+```sql
+when lower(FULL_TIME_POSITION) = 'y' then 1 
+when lower(FULL_TIME_POSITION) = 'n' then 0 
+```
+
+**One hot encoding for categorical fields**
+
+Generated dummies using one hot encoding 
+
+```python
+pd.get_dummies(df['us_region'], drop_first=True)
+pd.get_dummies(df['annual_salary_band'], drop_first=True)
+```
+
+
+
+## Exploratory Data Analysis 
+
+
+
+![](C:\Users\Turla\Desktop\Projects\oflc-data-analysis\imgs\eda_h1b.jpeg)
+
+## Model 
+
+Used Random Forest Classifier with 100 estimators to fit the training set, model generated an accuracy of 93%. Exported the model using externals lib from scikit learn.
 
 ## Model Deployment
 
+Firefly lightweight function as a service library written in Python is used. We can use POST request to the end point and obtain a prediction.
 
-
-
+```bash
+firefly h1b_model_preds.predict --bind 127.0.0.1:5000
+```
 
